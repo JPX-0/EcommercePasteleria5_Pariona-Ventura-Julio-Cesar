@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from './components/Navbar';
+import ItemListContainer from './components/ItemListContainer';
+import ItemDetailContainer from "./components/main/details/ItemDetailContainer"
+import Cart from './components/main/Cart';
+import Error404 from './components/main/Error404';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './styles/css/App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <BrowserRouter>
+      <header className="header">
+        <NavBar/>
       </header>
-    </div>
-  );
-}
-
+      <main className="main">
+        <Routes>
+          <Route path="/" element={<ItemListContainer/>}/>
+          <Route path="/category/:idCategory" element={<ItemListContainer/>}/>
+          <Route path="/item/:idProduct" element={<ItemDetailContainer/>}/>
+          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/*" element={<Error404/>}/>
+        </Routes>
+      </main>
+      <footer></footer>
+    </BrowserRouter>
+  )};
 export default App;
